@@ -26,13 +26,14 @@ def generate_blog(rss_link, limit, readme) -> str:
             # "title": (entry["title"][0:20] + "...") if(len(entry["title"]) > 22) else entry["title"],
             "title": entry["title"],
             "url": entry["link"],
-            "published": entry["pubDate"],
+            "published": entry["pubDate"]
         }
         for entry in entries[:limit]
     ]
 
     content = "\n".join(
-        ["* <a href='{url}' target='_blank'>{title}</a> - {published}".format(**item) for item in arr]
+        ["* <a href='{url}' target='_blank'>{title}</a> - {published}".format(
+            **item) for item in arr]
     )
 
     return generate_new_readme(BLOG_START_COMMENT, BLOG_END_COMMENT, content, readme)
@@ -40,7 +41,8 @@ def generate_blog(rss_link, limit, readme) -> str:
 
 def generate_douban(username, limit, readme) -> str:
     """Generate douban"""
-    entries = feedparser.parse("https://www.douban.com/feed/people/" + username + "/interests")["entries"]
+    entries = feedparser.parse(
+        "https://www.douban.com/feed/people/" + username + "/interests")["entries"]
     arr = [
         {
             "title": item["title"],
@@ -52,7 +54,8 @@ def generate_douban(username, limit, readme) -> str:
     ]
 
     content = "\n".join(
-        ["* <a href='{url}' target='_blank'>{title}</a> {rating_star}- {published}".format(**item) for item in arr]
+        ["* <a href='{url}' target='_blank'>{title}</a> {rating_star}- {published}".format(
+            **item) for item in arr]
     )
 
     return generate_new_readme(DOUBAN_START_COMMENT, DOUBAN_END_COMMENT, content, readme)
@@ -63,14 +66,16 @@ def generate_new_readme(start_comment: str, end_comment: str, content: str, read
     pattern = f"{start_comment}[\\s\\S]+{end_comment}"
     repl = f"{start_comment}\n{content}\n{end_comment}"
     if re.search(pattern, readme) is None:
-        print(f"can not find section in your readme, please check it, it should be {start_comment} and {end_comment}")
+        print(
+            f"can not find section in your readme, please check it, it should be {start_comment} and {end_comment}")
 
     return re.sub(pattern, repl, readme)
 
 
 def format_time(timestamp) -> datetime:
     gmt_format = '%a, %d %b %Y %H:%M:%S GMT'
-    date_str = datetime.datetime.strptime(timestamp, gmt_format) + datetime.timedelta(hours=8)
+    date_str = datetime.datetime.strptime(
+        timestamp, gmt_format) + datetime.timedelta(hours=8)
     return date_str.date()
 
 
