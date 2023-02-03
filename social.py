@@ -45,13 +45,12 @@ def generate_douban(username, limit, readme) -> str:
             "title": item["title"],
             "url": item["link"].split("#")[0],
             "published": format_time(item["published"]),
-#             "rating_star": generate_rating_star(item["description"])
         }
         for item in entries[:limit]
     ]
 
     content = "\n".join(
-        ["* <a href='{url}' target='_blank'>{title}</a> {rating_star}- {published}".format(**item) for item in arr]
+        ["* <a href='{url}' target='_blank'>{title}</a> - {published}".format(**item) for item in arr]
     )
 
     return generate_new_readme(DOUBAN_START_COMMENT, DOUBAN_END_COMMENT, content, readme)
