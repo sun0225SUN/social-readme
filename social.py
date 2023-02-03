@@ -26,7 +26,7 @@ def generate_blog(rss_link, limit, readme) -> str:
             # "title": (entry["title"][0:20] + "...") if(len(entry["title"]) > 22) else entry["title"],
             "title": entry["title"],
             "url": entry["link"],
-            "published": entry["pubDate"].split,
+            "published": entry["pubDate"],
         }
         for entry in entries[:limit]
     ]
