@@ -26,7 +26,7 @@ def generate_blog(rss_link, limit, readme) -> str:
             # "title": (entry["title"][0:20] + "...") if(len(entry["title"]) > 22) else entry["title"],
             "title": entry["title"],
             "url": entry["link"].split("#")[0],
-            "published": entry["published"].split("T")[0],
+            "published": format_time(entry["published"]).split("T")[0],
         }
         for entry in entries[:limit]
     ]
@@ -75,8 +75,9 @@ def format_time(timestamp) -> datetime:
 
 
 def generate_rating_star(desc) -> str:
-    pattern = re.compile(r'<p>推荐: [\s\S]？+</p>')
+    pattern = re.compile(r'<p>推荐: (\S\S)？+</p>')
     matches = re.findall(pattern, desc)
+    print(matches)
     if len(matches) > 0:
         return DOUBAN_RATING[matches[0]]
     return ''
