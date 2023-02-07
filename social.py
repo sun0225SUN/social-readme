@@ -75,7 +75,7 @@ def format_time(timestamp) -> datetime:
 
 
 def generate_rating_star(desc) -> str:
-    pattern = re.compile(r'<p>推荐: [\S\S]+(</p>)？')
+    pattern = re.compile(r'<p>推荐: [\S\S]+</p>')
     matches = re.findall(pattern, desc)
     print(matches)
     if len(matches) > 0:
