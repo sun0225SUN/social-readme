@@ -75,6 +75,8 @@ def format_time(timestamp) -> datetime:
 
 
 def generate_rating_star(desc) -> str:
-    pattern = re.compile(r'<p>推荐: [\s\S]+</p>')
-    matches = re.search(pattern, desc)
-    return DOUBAN_RATING[matches[0]]
+    pattern = re.compile(r'<p>推荐: [\s\S]？+</p>')
+    matches = re.findall(pattern, desc)
+    if len(matches) > 0:
+        return DOUBAN_RATING[matches[0]]
+    return ''
