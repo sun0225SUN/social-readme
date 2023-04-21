@@ -40,6 +40,25 @@ def generate_blog(rss_link, limit, readme) -> str:
 
     return generate_new_readme(BLOG_START_COMMENT, BLOG_END_COMMENT, content, readme)
 
+def generate_brain(rss_link, limit, readme) -> str:
+    """Generate brain"""
+    entries = feedparser.parse(rss_link)["entries"]
+    arr = [
+        {
+            # "title": (entry["title"][0:20] + "...") if(len(entry["title"]) > 22) else entry["title"],
+            "title": entry["title"],
+            "url": entry["link"],
+            "published": format_time(entry["published"]),
+        }
+        for entry in entries[:limit]
+    ]
+
+    content = "\n".join(
+        ["* <a href='{url}' target='_blank'>{title}</a> - {published}".format(**item) for item in arr]
+    )
+
+    return generate_new_readme(BRAIN_START_COMMENT, BRAIN_END_COMMENT, content, readme)
+
 def generate_douban(username, limit, readme) -> str:
     """Generate douban"""
     entries = feedparser.parse("https://www.douban.com/feed/people/" + username + "/interests")["entries"]
