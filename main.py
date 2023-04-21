@@ -48,7 +48,7 @@ if __name__ == "__main__":
     if BRAIN_RSS_LINK is not None and BRAIN_LIMIT > 0:
         print("BRAIN_RSS_LINK:" + BRAIN_RSS_LINK)
         print("BRAIN_LIMIT:" + str(BRAIN_LIMIT))
-        new_readme = social.generate_blog(BRAIN_RSS_LINK, BRAIN_LIMIT, new_readme)
+        new_readme = social.generate_brain(BRAIN_RSS_LINK, BRAIN_LIMIT, new_readme)
         
     if DOUBAN_NAME is not None and DOUBAN_LIMIT > 0:
         print("DOUBAN_NAME:" + DOUBAN_NAME)
