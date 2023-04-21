@@ -6,6 +6,9 @@ import feedparser
 BLOG_START_COMMENT = '<!-- START_SECTION:blog -->'
 BLOG_END_COMMENT = '<!-- END_SECTION:blog -->'
 
+BRAIN_START_COMMENT = '<!-- START_SECTION:brain -->'
+BRAIN_END_COMMENT = '<!-- END_SECTION:brain -->'
+
 DOUBAN_START_COMMENT = '<!-- START_SECTION:douban -->'
 DOUBAN_END_COMMENT = '<!-- END_SECTION:douban -->'
 
@@ -36,7 +39,6 @@ def generate_blog(rss_link, limit, readme) -> str:
     )
 
     return generate_new_readme(BLOG_START_COMMENT, BLOG_END_COMMENT, content, readme)
-
 
 def generate_douban(username, limit, readme) -> str:
     """Generate douban"""
