@@ -13,6 +13,9 @@ COMMIT_MESSAGE = os.getenv("INPUT_COMMIT_MESSAGE")
 BLOG_RSS_LINK = os.getenv('INPUT_BLOG_RSS_LINK')
 BLOG_LIMIT = int(os.getenv('INPUT_BLOG_LIMIT'))
 
+BRAIN_RSS_LINK = os.getenv('INPUT_BRAIN_RSS_LINK')
+BRAIN_LIMIT = int(os.getenv('INPUT_BRAIN_LIMIT'))
+
 DOUBAN_NAME = os.getenv('INPUT_DOUBAN_NAME')
 DOUBAN_LIMIT = int(os.getenv('INPUT_DOUBAN_LIMIT'))
 
@@ -41,7 +44,12 @@ if __name__ == "__main__":
         print("BLOG_RSS_LINK:" + BLOG_RSS_LINK)
         print("BLOG_LIMIT:" + str(BLOG_LIMIT))
         new_readme = social.generate_blog(BLOG_RSS_LINK, BLOG_LIMIT, new_readme)
-
+        
+    if BRAIN_RSS_LINK is not None and BRAIN_LIMIT > 0:
+        print("BRAIN_RSS_LINK:" + BRAIN_RSS_LINK)
+        print("BRAIN_LIMIT:" + str(BRAIN_LIMIT))
+        new_readme = social.generate_blog(BRAIN_RSS_LINK, BRAIN_LIMIT, new_readme)
+        
     if DOUBAN_NAME is not None and DOUBAN_LIMIT > 0:
         print("DOUBAN_NAME:" + DOUBAN_NAME)
         print("DOUBAN_LIMIT:" + str(DOUBAN_LIMIT))
