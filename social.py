@@ -43,6 +43,7 @@ def generate_blog(rss_link, limit, readme) -> str:
 def generate_brain(rss_link, limit, readme) -> str:
     """Generate brain"""
     entries = feedparser.parse(rss_link)["entries"].reverse()
+    print(entries)
     arr = [
         {
             # "title": (entry["title"][0:20] + "...") if(len(entry["title"]) > 22) else entry["title"],
