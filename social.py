@@ -43,6 +43,8 @@ def generate_blog(rss_link, limit, readme) -> str:
 def generate_brain(rss_link, limit, readme) -> str:
     """Generate brain"""
     entries = feedparser.parse(rss_link)["entries"]
+#     print(entries)
+    entries = entries[::-1]
     print(entries)
     arr = [
         {
@@ -51,7 +53,7 @@ def generate_brain(rss_link, limit, readme) -> str:
             "url": entry["link"],
             "published": format_time(entry["published"]),
         }
-        for entry in entries[-limit:]
+        for entry in entries[:limit]
     ]
 
     content = "\n".join(
