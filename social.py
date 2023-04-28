@@ -50,7 +50,7 @@ def generate_brain(rss_link, limit, readme) -> str:
             "url": entry["link"],
             "published": format_time(entry["published"]),
         }
-        for entry in entries[:limit]
+        for entry in entries[:-limit]
     ]
 
     content = "\n".join(
